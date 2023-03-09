@@ -5,6 +5,9 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.jpa.persistence.AddressRepo;
@@ -13,7 +16,7 @@ import com.jpa.persistence.entities.Address;
 import com.jpa.persistence.entities.Employee;
 
 @Service
-public class EmpService {
+public class EmpService{
 	@Autowired
 	private EmpRepo empRepo;
 
@@ -52,6 +55,11 @@ public class EmpService {
 	public List<Employee> getLikeEmp(String pattern) {
 		return empRepo.findByFirstNameLike(pattern);
 	}
+
+//	@Override
+//	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		return empRepo.findByuserName(username).orElseThrow(() -> new UsernameNotFoundException("username " + username + " not found"));
+//	}
 
 //	public Employee deleteADDRESS(Long id) {
 //		Employee temp = empRepo.findById(id).get();

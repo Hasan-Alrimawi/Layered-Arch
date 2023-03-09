@@ -1,7 +1,11 @@
 package com.jpa.persistence.entities;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -17,11 +21,18 @@ import jakarta.persistence.Table;
 @Entity
 @Table(name = "Employee")
 public class Employee {
+//public class Employee{
+	/**
+	 * 
+	 */
+//	private static final long serialVersionUID = -8464900903432221052L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long id;
 	private String firstName;
 	private String lastName;
+	private String username;
+	private String password;
 	private String position;
 
 //	@OneToMany(mappedBy = "emp", cascade = CascadeType.REMOVE) // here the remove is used so when the number entity is
@@ -55,11 +66,13 @@ public class Employee {
 		this.position = position;
 	}
 
-	public Employee(String firstName, String lastName, String position, Address address) {
+	public Employee(String firstName, String lastName, String position, Address address, String password) {
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.position = position;
 		this.address = address;
+		this.username = firstName + lastName;
+		this.password = password;
 	}
 
 	public Employee(String firstName, String lastName, String position, Address address, Set<Car> cars) {
@@ -68,6 +81,7 @@ public class Employee {
 		this.position = position;
 		this.address = address;
 		this.cars = cars;
+		this.username = firstName + lastName;
 	}
 
 	public Set<Car> getCars() {
@@ -122,4 +136,20 @@ public class Employee {
 		this.position = position;
 	}
 
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+	
 }

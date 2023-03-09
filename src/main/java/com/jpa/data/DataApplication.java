@@ -1,14 +1,13 @@
 package com.jpa.data;
 
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
+import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -25,7 +24,8 @@ import com.jpa.persistence.entities.PhoneNumber;
 @ComponentScan({"com.jpa.controllers","com.jpa.services"})
 @EntityScan("com.jpa.persistence.entities")
 @EnableJpaRepositories("com.jpa.persistence")
-@SpringBootApplication
+@SpringBootApplication(exclude = {SecurityAutoConfiguration.class })
+//@SpringBootApplication
 public class DataApplication {
 
 	public static void main(String[] args) {
@@ -43,7 +43,7 @@ public class DataApplication {
 			empR.save(has);
 			empR.save(new Employee("Hamody", "Mokbel", "QA"));
 			empR.save(new Employee("Bara", "Jabaly", "Mobile"));
-			empR.save(new Employee("Mohammed", "Balawi", "Back-End", new Address("Test Address")));
+//			empR.save(new Employee("Mohammed", "Balawi", "Back-End", new Address("Test Address")));
 			phoR.save(new PhoneNumber(Long.parseLong("0592512460")));
 			phoR.save(new PhoneNumber(Long.parseLong("0598351456")));
 			carR.save(new Car("BMW"));

@@ -2,6 +2,7 @@ package com.jpa.persistence;
 
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -17,5 +18,7 @@ public interface EmpRepo extends JpaRepository<Employee, Long>{
 	
 	@Query(value = "SELECT * FROM Employee t where t.address_id = :addressId", nativeQuery = true)
 	public List<Employee> findByAddress(@Param("addressId") Long addressId);
+	
+//	public Optional<Employee> findByuserName(String userName);
 
 }
